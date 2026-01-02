@@ -18,8 +18,47 @@ const wallpaperData = {
     ]
 };
 
+// ==================== ADMIN CREDENTIALS ====================
+const ADMIN_CREDENTIALS = {
+    userId: 'subhamkr2611',
+    password: 'badboystone@11'
+};
+
+let adminLoggedIn = false;
+let currentWallpaperId = null;
+
+// ==================== THEME MANAGEMENT ====================
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+}
+
+function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateThemeIcon(theme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+}
+
+function updateThemeIcon(theme) {
+    const themeBtn = document.querySelector('.theme-toggle-btn i');
+    if (themeBtn) {
+        if (theme === 'dark') {
+            themeBtn.className = 'fas fa-sun';
+        } else {
+            themeBtn.className = 'fas fa-moon';
+        }
+    }
+}
+
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', function() {
+    initializeTheme();
     initializeApp();
 });
 
@@ -282,6 +321,8 @@ function openWallpaperModal(wallpaperId) {
 
     if (!wallpaper) return;
 
+    currentWallpaperId = wallpaperId;
+
     document.getElementById('modalImage').src = wallpaper.image;
     document.getElementById('modalTitle').textContent = wallpaper.title;
     document.getElementById('modalDescription').textContent = wallpaper.description || 'No description available';
@@ -304,6 +345,20 @@ function openWallpaperModal(wallpaperId) {
     }
 
     favoriteBtn.onclick = () => toggleFavorite(wallpaper);
+
+    // Admin buttons
+    const deleteBtn = document.getElementById('deleteBtn');
+    const editBtn = document.getElementById('editBtn');
+
+    if (adminLoggedIn) {
+        deleteBtn.style.display = 'block';
+        editBtn.style.display = 'block';
+        deleteBtn.onclick = () => deleteWallpaper(wallpaperId);
+        editBtn.onclick = () => editWallpaper(wallpaperId);
+    } else {
+        deleteBtn.style.display = 'none';
+        editBtn.style.display = 'none';
+    }
 
     const modal = document.getElementById('wallpaperModal');
     modal.classList.add('show');
@@ -397,3 +452,231 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// ==================== ADMIN AUTHENTICATION ====================
+function openAdminLogin() {
+    if (adminLoggedIn) {
+        openAdminPanel();
+    } else {
+        const modal = document.getElementById('adminLoginModal');
+        modal.classList.add('show');
+        document.getElementById('adminLoginForm').reset();
+        document.getElementById('adminStatusMessage').textContent = '';
+    }
+}
+
+function closeAdminLogin() {
+    const modal = document.getElementById('adminLoginModal');
+    modal.classList.remove('show');
+}
+
+function closeAdminPanel() {
+    const modal = document.getElementById('adminPanelModal');
+    modal.classList.remove('show');
+}
+
+function openAdminPanel() {
+    if (!adminLoggedIn) {
+        showErrorMessage('Please login first');
+        return;
+    }
+    
+    loadAdminPanel();
+    const modal = document.getElementById('adminPanelModal');
+    modal.classList.add('show');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', handleAdminLogin);
+    }
+
+    const adminLoginModal = document.getElementById('adminLoginModal');
+    if (adminLoginModal) {
+        adminLoginModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAdminLogin();
+            }
+        });
+    }
+
+    const adminPanelModal = document.getElementById('adminPanelModal');
+    if (adminPanelModal) {
+        adminPanelModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAdminPanel();
+            }
+        });
+    }
+}, { once: true });
+
+function handleAdminLogin(e) {
+    e.preventDefault();
+
+    const userId = document.getElementById('adminUserId').value;
+    const password = document.getElementById('adminPassword').value;
+    const statusMsg = document.getElementById('adminStatusMessage');
+
+    if (userId === ADMIN_CREDENTIALS.userId && password === ADMIN_CREDENTIALS.password) {
+        adminLoggedIn = true;
+        statusMsg.style.color = '#00b894';
+        statusMsg.textContent = '✓ Login successful! Redirecting to admin panel...';
+        
+        setTimeout(() => {
+            closeAdminLogin();
+            openAdminPanel();
+        }, 1000);
+    } else {
+        statusMsg.style.color = '#e74c3c';
+        statusMsg.textContent = '✗ Invalid credentials';
+    }
+}
+
+function adminLogout() {
+    adminLoggedIn = false;
+    closeAdminPanel();
+    const adminBtn = document.querySelector('.admin-btn');
+    if (adminBtn) {
+        adminBtn.innerHTML = '<i class="fas fa-shield-alt"></i> Admin';
+    }
+    showSuccessMessage('Logged out successfully');
+}
+
+function loadAdminPanel() {
+    const allWallpapers = [...wallpaperData.pc, ...wallpaperData.mobile];
+    const adminList = document.getElementById('adminWallpaperList');
+    adminList.innerHTML = '';
+
+    allWallpapers.forEach(wallpaper => {
+        const item = document.createElement('div');
+        item.className = 'admin-wallpaper-item';
+        item.innerHTML = `
+            <div class="admin-item-info">
+                <h4>${wallpaper.title}</h4>
+                <p>${wallpaper.category} - ${wallpaper.type.toUpperCase()}</p>
+                <p>By: ${wallpaper.artist}</p>
+            </div>
+            <div class="admin-item-actions">
+                <button class="btn btn-warning btn-small" onclick="openWallpaperEditForm(${wallpaper.id})">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-danger btn-small" onclick="confirmDeleteWallpaper(${wallpaper.id})">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        `;
+        adminList.appendChild(item);
+    });
+}
+
+function deleteWallpaper(wallpaperId) {
+    if (!adminLoggedIn) {
+        showErrorMessage('Admin access required');
+        return;
+    }
+
+    if (confirm('Are you sure you want to delete this wallpaper?')) {
+        // Remove from PC wallpapers
+        const pcIndex = wallpaperData.pc.findIndex(w => w.id === wallpaperId);
+        if (pcIndex > -1) {
+            wallpaperData.pc.splice(pcIndex, 1);
+        }
+
+        // Remove from Mobile wallpapers
+        const mobileIndex = wallpaperData.mobile.findIndex(w => w.id === wallpaperId);
+        if (mobileIndex > -1) {
+            wallpaperData.mobile.splice(mobileIndex, 1);
+        }
+
+        closeModal();
+        loadWallpapers();
+        showSuccessMessage('Wallpaper deleted successfully');
+    }
+}
+
+function confirmDeleteWallpaper(wallpaperId) {
+    if (!adminLoggedIn) {
+        showErrorMessage('Admin access required');
+        return;
+    }
+
+    if (confirm('Are you sure you want to delete this wallpaper?')) {
+        deleteWallpaper(wallpaperId);
+        loadAdminPanel();
+    }
+}
+
+function editWallpaper(wallpaperId) {
+    if (!adminLoggedIn) {
+        showErrorMessage('Admin access required');
+        return;
+    }
+
+    const allWallpapers = [...wallpaperData.pc, ...wallpaperData.mobile];
+    const wallpaper = allWallpapers.find(w => w.id === wallpaperId);
+
+    if (!wallpaper) return;
+
+    const newTitle = prompt('Enter new title:', wallpaper.title);
+    if (newTitle === null) return;
+
+    const newDescription = prompt('Enter new description:', wallpaper.description);
+    if (newDescription === null) return;
+
+    const newArtist = prompt('Enter new artist name:', wallpaper.artist);
+    if (newArtist === null) return;
+
+    // Update in both arrays
+    const pcWallpaper = wallpaperData.pc.find(w => w.id === wallpaperId);
+    if (pcWallpaper) {
+        pcWallpaper.title = newTitle;
+        pcWallpaper.description = newDescription;
+        pcWallpaper.artist = newArtist;
+    }
+
+    const mobileWallpaper = wallpaperData.mobile.find(w => w.id === wallpaperId);
+    if (mobileWallpaper) {
+        mobileWallpaper.title = newTitle;
+        mobileWallpaper.description = newDescription;
+        mobileWallpaper.artist = newArtist;
+    }
+
+    closeModal();
+    loadWallpapers();
+    showSuccessMessage('Wallpaper updated successfully');
+}
+
+function openWallpaperEditForm(wallpaperId) {
+    if (!adminLoggedIn) {
+        showErrorMessage('Admin access required');
+        return;
+    }
+
+    editWallpaper(wallpaperId);
+    loadAdminPanel();
+}
+
+function showErrorMessage(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #e74c3c;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}

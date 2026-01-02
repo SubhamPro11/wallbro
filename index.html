@@ -22,6 +22,8 @@
                 <li><a href="#mobile-wallpapers" class="nav-link">Mobile Wallpapers</a></li>
                 <li><a href="#upload" class="nav-link">Upload</a></li>
                 <li><a href="#favorites" class="nav-link"><i class="fas fa-heart"></i> Favorites</a></li>
+                <li><button class="nav-link theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+                <li><button class="nav-link admin-btn" onclick="openAdminLogin()"><i class="fas fa-shield-alt"></i> Admin</button></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -175,6 +177,12 @@
                         <button class="btn btn-secondary" id="favoriteBtn">
                             <i class="far fa-heart"></i> Add to Favorites
                         </button>
+                        <button class="btn btn-danger" id="deleteBtn" style="display: none;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-warning" id="editBtn" style="display: none;">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
                     </div>
                 </div>
             </div>
@@ -191,6 +199,47 @@
             <p class="empty-message">No favorites yet. Start adding some!</p>
         </div>
     </section>
+
+    <!-- Admin Login Modal -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content admin-modal">
+            <span class="close-modal" onclick="closeAdminLogin()">&times;</span>
+            <div class="modal-body">
+                <h2><i class="fas fa-lock"></i> Admin Login</h2>
+                <form id="adminLoginForm" class="admin-form">
+                    <div class="form-group">
+                        <label for="adminUserId">User ID</label>
+                        <input type="text" id="adminUserId" name="userId" placeholder="Enter your user ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">Login</button>
+                </form>
+                <p class="admin-status" id="adminStatusMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminPanelModal">
+        <div class="modal-content admin-modal">
+            <span class="close-modal" onclick="closeAdminPanel()">&times;</span>
+            <div class="modal-body">
+                <div class="admin-header">
+                    <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
+                    <button class="btn btn-small btn-danger" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+                <div class="admin-content">
+                    <h3>Wallpaper Management</h3>
+                    <div class="admin-wallpaper-list" id="adminWallpaperList">
+                        <!-- Wallpapers will be listed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
