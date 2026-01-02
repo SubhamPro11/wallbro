@@ -56,7 +56,37 @@ function updateThemeIcon(theme) {
     }
 }
 
-// ==================== INITIALIZATION ====================
+// ==================== THEME MANAGEMENT ====================
+function initializeTheme() {
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('wallpaperTheme') || 'light';
+    setTheme(savedTheme);
+}
+
+function setTheme(theme) {
+    const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('wallpaperTheme', theme);
+    
+    // Update theme toggle button icon
+    const themeBtn = document.querySelector('.theme-toggle-btn i');
+    if (themeBtn) {
+        if (theme === 'dark') {
+            themeBtn.classList.remove('fa-moon');
+            themeBtn.classList.add('fa-sun');
+        } else {
+            themeBtn.classList.remove('fa-sun');
+            themeBtn.classList.add('fa-moon');
+        }
+    }
+}
+
+function toggleTheme() {
+    const root = document.documentElement;
+    const currentTheme = root.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+}
 document.addEventListener('DOMContentLoaded', function() {
     initializeTheme();
     initializeApp();
@@ -509,6 +539,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Admin search and filter listeners
+    const adminSearchInput = document.getElementById('adminSearchInput');
+    if (adminSearchInput) {
+        adminSearchInput.addEventListener('input', loadAdminPanel);
+    }
+
+    const adminFilterSelect = document.getElementById('adminFilterSelect');
+    if (adminFilterSelect) {
+        adminFilterSelect.addEventListener('change', loadAdminPanel);
+    }
 }, { once: true });
 
 function handleAdminLogin(e) {
@@ -548,14 +589,36 @@ function loadAdminPanel() {
     const adminList = document.getElementById('adminWallpaperList');
     adminList.innerHTML = '';
 
-    allWallpapers.forEach(wallpaper => {
+    // Update statistics
+    document.getElementById('pcWallpaperCount').textContent = wallpaperData.pc.length;
+    document.getElementById('mobileWallpaperCount').textContent = wallpaperData.mobile.length;
+    document.getElementById('totalWallpaperCount').textContent = allWallpapers.length;
+
+    // Get filter values
+    const searchQuery = document.getElementById('adminSearchInput')?.value.toLowerCase() || '';
+    const filterType = document.getElementById('adminFilterSelect')?.value || 'all';
+
+    // Filter wallpapers
+    let filteredWallpapers = allWallpapers.filter(wallpaper => {
+        const matchesSearch = wallpaper.title.toLowerCase().includes(searchQuery);
+        const matchesType = filterType === 'all' || wallpaper.type === filterType;
+        return matchesSearch && matchesType;
+    });
+
+    if (filteredWallpapers.length === 0) {
+        adminList.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-secondary);">No wallpapers found</div>';
+        return;
+    }
+
+    filteredWallpapers.forEach(wallpaper => {
         const item = document.createElement('div');
         item.className = 'admin-wallpaper-item';
         item.innerHTML = `
             <div class="admin-item-info">
                 <h4>${wallpaper.title}</h4>
-                <p>${wallpaper.category} - ${wallpaper.type.toUpperCase()}</p>
-                <p>By: ${wallpaper.artist}</p>
+                <p><i class="fas fa-tag"></i> ${wallpaper.category}</p>
+                <p><i class="fas fa-${wallpaper.type === 'pc' ? 'desktop' : 'mobile-alt'}"></i> ${wallpaper.type.toUpperCase()}</p>
+                <p><i class="fas fa-user"></i> ${wallpaper.artist}</p>
             </div>
             <div class="admin-item-actions">
                 <button class="btn btn-warning btn-small" onclick="openWallpaperEditForm(${wallpaper.id})">
