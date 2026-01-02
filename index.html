@@ -13,8 +13,10 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <i class="fas fa-image"></i>
-                <span>WallHub</span>
+                <div class="logo-icon-wrapper">
+                    <i class="fas fa-image"></i>
+                </div>
+                <span class="logo-text">WallHub</span>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
@@ -33,15 +35,57 @@
         </div>
     </nav>
 
+    <!-- Branding Section -->
+    <section class="branding-section">
+        <div class="brand-logo-container">
+            <div class="brand-logo">
+                <div class="logo-circle">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h1 class="brand-name">WallHub</h1>
+                <p class="brand-tagline">Premium Wallpaper Collection</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Welcome to WallHub</h1>
-            <p>Discover and share beautiful wallpapers for all your devices</p>
+            <h1 class="hero-title">Discover Beautiful Wallpapers</h1>
+            <p class="hero-subtitle">Curated collection of stunning wallpapers for all your devices</p>
             <div class="hero-buttons">
-                <a href="#pc-wallpapers" class="btn btn-primary">Explore Wallpapers</a>
-                <a href="#upload" class="btn btn-secondary">Upload Your Wallpaper</a>
+                <a href="#pc-wallpapers" class="btn btn-primary btn-large">
+                    <i class="fas fa-images"></i> Explore Wallpapers
+                </a>
+                <a href="#upload" class="btn btn-secondary btn-large">
+                    <i class="fas fa-cloud-upload-alt"></i> Share Your Art
+                </a>
             </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <h3 id="heroTotalCount">0</h3>
+                    <p>Wallpapers</p>
+                </div>
+                <div class="hero-stat">
+                    <h3>500K+</h3>
+                    <p>Downloads</p>
+                </div>
+                <div class="hero-stat">
+                    <h3>10K+</h3>
+                    <p>Users</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="featured-section" id="featured">
+        <div class="section-header">
+            <h2><i class="fas fa-fire"></i> Trending Now</h2>
+            <p>Most popular wallpapers this week</p>
+        </div>
+        <div class="wallpaper-grid featured-grid" id="featuredGrid">
+            <!-- Featured wallpapers will be loaded here -->
         </div>
     </section>
 
@@ -313,6 +357,16 @@
             <p>&copy; 2026 WallHub. All rights reserved. Made with <i class="fas fa-heart"></i> for wallpaper lovers.</p>
         </div>
     </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action-button" onclick="document.getElementById('upload').scrollIntoView({behavior: 'smooth'}); openUploadTab();" title="Upload Wallpaper">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTopBtn" onclick="scrollToTop()" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

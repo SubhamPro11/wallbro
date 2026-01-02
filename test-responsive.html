@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallHub - Responsive Design Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #6c5ce7;
+            margin-bottom: 10px;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+        }
+
+        .breakpoint-info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .breakpoint-info.mobile {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+
+        .breakpoint-info.tablet {
+            background: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+
+        .breakpoint-info.desktop {
+            background: #f3e5f5;
+            border-left-color: #9c27b0;
+        }
+
+        .breakpoint-label {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .breakpoint-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px dashed #6c5ce7;
+            border-radius: 5px;
+        }
+
+        .test-section h2 {
+            color: #6c5ce7;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            margin-bottom: 15px;
+        }
+
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 10px 5px 10px 0;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .current-screen {
+            background: #fff9c4;
+            border: 2px solid #fbc02d;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .width-indicator {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .width-value {
+            font-family: monospace;
+            color: #6c5ce7;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .test-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .test-container {
+                padding: 15px;
+            }
+
+            .responsive-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .test-container {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 10px 12px;
+            }
+
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-item {
+                padding: 20px;
+                min-height: 100px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎨 WallHub - Responsive Design Test</h1>
+        <p>Resize your browser window to test different breakpoints</p>
+
+        <div class="width-indicator">
+            Current Screen Width: <span class="width-value" id="screenWidth">0px</span>
+        </div>
+
+        <div class="current-screen" id="breakpointLabel">
+            Loading...
+        </div>
+
+        <!-- Mobile Breakpoint -->
+        <div class="breakpoint-info mobile">
+            <div class="breakpoint-label">📱 Mobile (< 480px)</div>
+            <div class="breakpoint-details">
+                Single column layout, hamburger menu, optimized touch targets, smaller fonts
+            </div>
+        </div>
+
+        <!-- Tablet Breakpoint -->
+        <div class="breakpoint-info tablet">
+            <div class="breakpoint-label">📱 Tablet (481px - 1024px)</div>
+            <div class="breakpoint-details">
+                2-3 column layouts, adjusted navigation, touch-optimized interface
+            </div>
+        </div>
+
+        <!-- Desktop Breakpoint -->
+        <div class="breakpoint-info desktop">
+            <div class="breakpoint-label">🖥️ Desktop (1025px+)</div>
+            <div class="breakpoint-details">
+                Full 3-4 column grids, horizontal navigation, optimal spacing
+            </div>
+        </div>
+
+        <!-- Features Test -->
+        <div class="test-section">
+            <h2>✨ Responsive Features</h2>
+            <ul class="feature-list">
+                <li>Navigation adjusts for all screen sizes</li>
+                <li>Wallpaper grids responsive (1-3 columns)</li>
+                <li>Hero section scales with device</li>
+                <li>Admin panel works on mobile</li>
+                <li>Floating buttons positioned correctly</li>
+                <li>Forms are touch-friendly</li>
+                <li>Dark mode works on all devices</li>
+                <li>Modals scale properly</li>
+            </ul>
+        </div>
+
+        <!-- Interactive Test -->
+        <div class="test-section">
+            <h2>🧪 Interactive Elements</h2>
+            <p>Test touch interactions with these buttons:</p>
+            <button onclick="testButton()">Test Button 1</button>
+            <button onclick="testButton()">Test Button 2</button>
+            <button onclick="testButton()">Test Button 3</button>
+            <p id="testResult" style="margin-top: 10px; color: #4caf50; display: none;">✓ Button clicked successfully!</p>
+        </div>
+
+        <!-- Grid Test -->
+        <div class="test-section">
+            <h2>📐 Responsive Grid Test</h2>
+            <p>Grid should adapt: 1 column (mobile), 2-3 (tablet), 3+ (desktop)</p>
+            <div class="responsive-grid">
+                <div class="grid-item">Item 1</div>
+                <div class="grid-item">Item 2</div>
+                <div class="grid-item">Item 3</div>
+                <div class="grid-item">Item 4</div>
+            </div>
+        </div>
+
+        <!-- Viewport Meta Tag Check -->
+        <div class="test-section">
+            <h2>✅ Meta Tag Verification</h2>
+            <ul class="feature-list">
+                <li>Viewport meta tag: <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></li>
+                <li>Charset: UTF-8</li>
+                <li>Device-width scaling: Enabled</li>
+                <li>Zoom: Enabled (user can zoom)</li>
+            </ul>
+        </div>
+
+        <!-- Testing Recommendations -->
+        <div class="test-section">
+            <h2>📋 Testing Checklist</h2>
+            <ul class="feature-list">
+                <li>Test on actual mobile devices (not just browser emulation)</li>
+                <li>Test on different orientations (portrait & landscape)</li>
+                <li>Test on different browsers (Chrome, Firefox, Safari)</li>
+                <li>Test with dark mode enabled</li>
+                <li>Verify all buttons are min 44x44px</li>
+                <li>Check that text is readable without zooming</li>
+                <li>Verify no horizontal scrolling</li>
+                <li>Test animations are smooth</li>
+            </ul>
+        </div>
+
+        <!-- Developer Info -->
+        <div class="test-section">
+            <h2>🛠️ Developer Information</h2>
+            <p><strong>CSS Breakpoints Used:</strong></p>
+            <ul class="feature-list">
+                <li>Desktop: Default styles (1025px+)</li>
+                <li>Tablet: @media (max-width: 1024px)</li>
+                <li>Small Tablet: @media (max-width: 768px)</li>
+                <li>Mobile: @media (max-width: 480px)</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>Touch Optimizations:</strong></p>
+            <ul class="feature-list">
+                <li>Minimum tap target: 44x44px</li>
+                <li>No tap highlight color</li>
+                <li>Passive event listeners for scroll</li>
+                <li>16px font size on inputs (prevents iOS zoom)</li>
+                <li>Touch-action: manipulation on buttons</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Update screen width indicator
+        function updateScreenInfo() {
+            const width = window.innerWidth;
+            document.getElementById('screenWidth').textContent = width + 'px';
+            
+            let breakpoint = '';
+            if (width < 480) {
+                breakpoint = '📱 MOBILE VIEW (< 480px)';
+            } else if (width < 1024) {
+                breakpoint = '📱 TABLET VIEW (481px - 1024px)';
+            } else {
+                breakpoint = '🖥️ DESKTOP VIEW (1025px+)';
+            }
+            
+            document.getElementById('breakpointLabel').textContent = breakpoint;
+        }
+
+        // Test button click
+        function testButton() {
+            const result = document.getElementById('testResult');
+            result.style.display = 'block';
+            setTimeout(() => {
+                result.style.display = 'none';
+            }, 2000);
+        }
+
+        // Update on load and resize
+        window.addEventListener('load', updateScreenInfo);
+        window.addEventListener('resize', updateScreenInfo);
+    </script>
+</body>
+</html>

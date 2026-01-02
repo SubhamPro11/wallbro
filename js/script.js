@@ -94,8 +94,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeApp() {
     loadWallpapers();
+    loadFeaturedWallpapers();
     setupEventListeners();
     loadFavorites();
+    setupScrollListener();
 }
 
 // ==================== LOAD WALLPAPERS ====================
@@ -107,6 +109,28 @@ function loadWallpapers() {
     // Load Mobile Wallpapers
     const mobileGrid = document.getElementById('mobile-grid');
     displayWallpapers(wallpaperData.mobile, mobileGrid, 'all');
+
+    // Update hero stats
+    updateHeroStats();
+}
+
+function loadFeaturedWallpapers() {
+    // Get featured wallpapers (first 6 of combined data)
+    const allWallpapers = [...wallpaperData.pc, ...wallpaperData.mobile];
+    const featured = allWallpapers.slice(0, 6);
+    
+    const featuredGrid = document.getElementById('featuredGrid');
+    if (featuredGrid) {
+        displayWallpapers(featured, featuredGrid, 'all');
+    }
+}
+
+function updateHeroStats() {
+    const allWallpapers = [...wallpaperData.pc, ...wallpaperData.mobile];
+    const heroCount = document.getElementById('heroTotalCount');
+    if (heroCount) {
+        heroCount.textContent = allWallpapers.length;
+    }
 }
 
 function displayWallpapers(wallpapers, gridElement, selectedCategory = 'all') {
@@ -231,21 +255,44 @@ function setupEventListeners() {
     // Form submission
     uploadForm.addEventListener('submit', handleUploadSubmit);
 
-    // Hamburger menu
+    // Hamburger menu - Enhanced mobile navigation
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
-
-    // Close menu when link is clicked
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
         });
-    });
+
+        // Close menu when link is clicked
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Don't close menu for button clicks (theme toggle, admin)
+                if (!e.target.closest('button')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isClickInsideNav = navMenu.contains(e.target);
+            const isClickOnHamburger = hamburger.contains(e.target);
+            
+            if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    }
 }
 
 // ==================== IMAGE PREVIEW ====================
@@ -409,6 +456,45 @@ function downloadWallpaper(wallpaper) {
     document.body.removeChild(link);
     
     showSuccessMessage('Download started!');
+}
+
+// ==================== SCROLL UTILITIES ====================
+function setupScrollListener() {
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+    let scrollTimeout;
+    
+    // Debounce scroll events for better performance
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        }, 100);
+    }, { passive: true });
+
+    // Improve mobile scroll performance
+    document.addEventListener('touchstart', () => {
+        // Disable animations during touch for smoother scrolling
+        document.body.style.pointerEvents = 'auto';
+    }, { passive: true });
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function openUploadTab() {
+    // Highlight the upload section
+    const uploadSection = document.getElementById('upload');
+    if (uploadSection) {
+        uploadSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // ==================== FAVORITES ====================
