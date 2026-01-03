@@ -1,22 +1,17 @@
-// ==================== SAMPLE WALLPAPER DATA ====================
-const wallpaperData = {
-    pc: [
-        { id: 1, title: 'Mountain Serenity', category: 'nature', type: 'pc', description: 'Beautiful mountain landscape', artist: 'Nature Studio', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%235d6c7d" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em"%3EMountain Serenity%3C/text%3E%3C/svg%3E' },
-        { id: 2, title: 'Ocean Wave', category: 'nature', type: 'pc', description: 'Peaceful ocean view', artist: 'Wave Master', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%231e90ff" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em"%3EOcean Wave%3C/text%3E%3C/svg%3E' },
-        { id: 3, title: 'Abstract Colors', category: 'abstract', type: 'pc', description: 'Vibrant abstract design', artist: 'Color Artist', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23ff6b9d" width="200" height="300"/%3E%3Crect fill="%23c44569" x="200" width="200" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em"%3EAbstract Colors%3C/text%3E%3C/svg%3E' },
-        { id: 4, title: 'Tech Future', category: 'technology', type: 'pc', description: 'Modern technology theme', artist: 'Tech Designer', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%230a0e27" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em"%3ETech Future%3C/text%3E%3C/svg%3E' },
-        { id: 5, title: 'Minimalist', category: 'minimalist', type: 'pc', description: 'Simple and clean design', artist: 'Min Designer', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23f5f5f5" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="%23333" text-anchor="middle" dy=".3em"%3EMinimalist%3C/text%3E%3C/svg%3E' },
-        { id: 6, title: 'Artistic Blend', category: 'art', type: 'pc', description: 'Beautiful artistic creation', artist: 'Art Master', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23d4af37" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em"%3EArtistic Blend%3C/text%3E%3C/svg%3E' }
-    ],
-    mobile: [
-        { id: 7, title: 'Sunset Mobile', category: 'nature', type: 'mobile', description: 'Beautiful mobile wallpaper', artist: 'Sunset Studio', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400"%3E%3Crect fill="%23ff8c42" width="200" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="16" fill="white" text-anchor="middle" dy=".3em"%3ESunset Mobile%3C/text%3E%3C/svg%3E' },
-        { id: 8, title: 'Forest Trail', category: 'nature', type: 'mobile', description: 'Green forest path', artist: 'Forest Studio', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400"%3E%3Crect fill="%2327ae60" width="200" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="16" fill="white" text-anchor="middle" dy=".3em"%3EForest Trail%3C/text%3E%3C/svg%3E' },
-        { id: 9, title: 'Digital Art', category: 'abstract', type: 'mobile', description: 'Digital abstract design', artist: 'Digital Creator', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400"%3E%3Crect fill="%239b59b6" width="200" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="16" fill="white" text-anchor="middle" dy=".3em"%3EDigital Art%3C/text%3E%3C/svg%3E' },
-        { id: 10, title: 'Neon Lights', category: 'technology', type: 'mobile', description: 'Neon tech design', artist: 'Neon Studio', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400"%3E%3Crect fill="%23000" width="200" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="16" fill="%2300ff00" text-anchor="middle" dy=".3em"%3ENeon Lights%3C/text%3E%3C/svg%3E' },
-        { id: 11, title: 'Clean White', category: 'minimalist', type: 'mobile', description: 'Clean minimal wallpaper', artist: 'Minimal Studio', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400"%3E%3Crect fill="%23ffffff" width="200" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="16" fill="%23333" text-anchor="middle" dy=".3em"%3EClean White%3C/text%3E%3C/svg%3E' },
-        { id: 12, title: 'Canvas Art', category: 'art', type: 'mobile', description: 'Mobile canvas artwork', artist: 'Canvas Master', image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400"%3E%3Crect fill="%238b4513" width="200" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="16" fill="white" text-anchor="middle" dy=".3em"%3ECanvas Art%3C/text%3E%3C/svg%3E' }
-    ]
+// ==================== WALLPAPER DATA ====================
+// Data container - populated by DriveService
+let wallpaperData = {
+    pc: [],
+    mobile: []
 };
+
+// Persistence functions (Optional: if we want to save Favorites to LocalStorage, we keep getFavorites/saveFavorites separately)
+// But we remove the auto-load from localStorage for the main catalog since we are using Drive.
+function saveWallpapers() {
+    // No-op for main catalog if read-only from Drive
+    // If we were uploading, we'd handle it differently.
+}
+
 
 // ==================== ADMIN CREDENTIALS ====================
 const ADMIN_CREDENTIALS = {
@@ -67,7 +62,7 @@ function setTheme(theme) {
     const root = document.documentElement;
     root.setAttribute('data-theme', theme);
     localStorage.setItem('wallpaperTheme', theme);
-    
+
     // Update theme toggle button icon
     const themeBtn = document.querySelector('.theme-toggle-btn i');
     if (themeBtn) {
@@ -87,17 +82,42 @@ function toggleTheme() {
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
 }
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeTheme();
     initializeApp();
 });
 
-function initializeApp() {
-    loadWallpapers();
-    loadFeaturedWallpapers();
-    setupEventListeners();
-    loadFavorites();
-    setupScrollListener();
+async function initializeApp() {
+    // Show loader
+    const loader = document.getElementById('appLoader');
+    if (loader) loader.style.display = 'flex';
+
+    try {
+        // Fetch from Drive (or Mock)
+        const driveData = await DriveService.fetchWallpapers();
+        wallpaperData = driveData;
+
+    } catch (e) {
+        console.error("Init Error", e);
+    } finally {
+        // Hide loader
+        if (loader) loader.style.display = 'none';
+
+        // Proceed with UI init
+        if (document.getElementById('pc-grid')) {
+            loadWallpapers();
+            loadFeaturedWallpapers();
+        }
+        setupEventListeners();
+        if (document.getElementById('favorites-grid')) {
+            loadFavorites();
+        }
+        setupScrollListener();
+
+        // Init animations (if functions exist)
+        if (typeof initHeroAnimation === 'function') initHeroAnimation();
+        if (typeof initScrollReveal === 'function') initScrollReveal();
+    }
 }
 
 // ==================== LOAD WALLPAPERS ====================
@@ -112,13 +132,40 @@ function loadWallpapers() {
 
     // Update hero stats
     updateHeroStats();
+
+    // Initialize Hero Animation
+    initHeroAnimation();
+
+    // Initialize Scroll Reveal
+    initScrollReveal();
+}
+
+function initScrollReveal() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.wallpaper-card').forEach(card => {
+        card.classList.add('fade-in-up');
+        observer.observe(card);
+    });
 }
 
 function loadFeaturedWallpapers() {
     // Get featured wallpapers (first 6 of combined data)
     const allWallpapers = [...wallpaperData.pc, ...wallpaperData.mobile];
     const featured = allWallpapers.slice(0, 6);
-    
+
     const featuredGrid = document.getElementById('featuredGrid');
     if (featuredGrid) {
         displayWallpapers(featured, featuredGrid, 'all');
@@ -136,8 +183,8 @@ function updateHeroStats() {
 function displayWallpapers(wallpapers, gridElement, selectedCategory = 'all') {
     gridElement.innerHTML = '';
 
-    const filtered = selectedCategory === 'all' 
-        ? wallpapers 
+    const filtered = selectedCategory === 'all'
+        ? wallpapers
         : wallpapers.filter(w => w.category === selectedCategory);
 
     if (filtered.length === 0) {
@@ -153,14 +200,28 @@ function displayWallpapers(wallpapers, gridElement, selectedCategory = 'all') {
 
 function createWallpaperCard(wallpaper) {
     const card = document.createElement('div');
-    card.className = 'wallpaper-card';
+    card.className = 'wallpaper-card fade-in-up'; // Add fade class
+
+    // Check if favorite
+    const favorites = getFavorites();
+    const isFav = favorites.some(fav => fav.id === wallpaper.id);
+    const activeClass = isFav ? 'active' : '';
+    const heartIcon = isFav ? 'fas' : 'far';
+
     card.innerHTML = `
         <div style="position: relative; overflow: hidden;">
             <img src="${wallpaper.image}" alt="${wallpaper.title}" class="wallpaper-image">
             <div class="wallpaper-overlay">
+                <button class="fav-overlay-btn ${activeClass}" onclick="event.stopPropagation(); toggleFavoriteFromCard(this, ${wallpaper.id})" title="Add to Favorites">
+                    <i class="${heartIcon} fa-heart"></i>
+                </button>
                 <button class="overlay-button" onclick="openWallpaperModal(${wallpaper.id})">
                     <i class="fas fa-expand-alt"></i> View
                 </button>
+            </div>
+            <div class="wallpaper-unavailable">
+                <i class="fas fa-image"></i>
+                <p>Wallpaper unavailable</p>
             </div>
         </div>
         <div class="wallpaper-info">
@@ -171,9 +232,45 @@ function createWallpaperCard(wallpaper) {
             </div>
         </div>
     `;
+
     card.style.cursor = 'pointer';
+
+    // Handle image loading errors
+    const img = card.querySelector('.wallpaper-image');
+    img.addEventListener('error', function () {
+        card.classList.add('image-error');
+    });
+
+    // Remove error state on successful load
+    img.addEventListener('load', function () {
+        card.classList.remove('image-error');
+    });
+
     card.addEventListener('click', () => openWallpaperModal(wallpaper.id));
     return card;
+}
+
+function toggleFavoriteFromCard(btn, id) {
+    const allWallpapers = [...wallpaperData.pc, ...wallpaperData.mobile];
+    const wallpaper = allWallpapers.find(w => w.id === id);
+    if (wallpaper) {
+        toggleFavorite(wallpaper);
+
+        // Update UI state based on new persistence state
+        const favorites = getFavorites();
+        const isFav = favorites.some(f => f.id === id);
+        const icon = btn.querySelector('i');
+
+        if (isFav) {
+            btn.classList.add('active');
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+        } else {
+            btn.classList.remove('active');
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+        }
+    }
 }
 
 // ==================== CATEGORY FILTERING ====================
@@ -181,13 +278,13 @@ function setupEventListeners() {
     // Category buttons for PC
     const pcCategoryBtns = document.querySelectorAll('[data-type="pc"]');
     pcCategoryBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const category = this.getAttribute('data-category');
-            
+
             // Update active state
             document.querySelectorAll('[data-type="pc"]').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Filter and display
             const pcGrid = document.getElementById('pc-grid');
             displayWallpapers(wallpaperData.pc, pcGrid, category);
@@ -197,13 +294,13 @@ function setupEventListeners() {
     // Category buttons for Mobile
     const mobileCategoryBtns = document.querySelectorAll('[data-type="mobile"]');
     mobileCategoryBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const category = this.getAttribute('data-category');
-            
+
             // Update active state
             document.querySelectorAll('[data-type="mobile"]').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Filter and display
             const mobileGrid = document.getElementById('mobile-grid');
             displayWallpapers(wallpaperData.mobile, mobileGrid, category);
@@ -214,7 +311,7 @@ function setupEventListeners() {
     const modal = document.getElementById('wallpaperModal');
     const closeBtn = document.querySelector('.close-modal');
     closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e) {
+    modal.addEventListener('click', function (e) {
         if (e.target === this) {
             closeModal();
         }
@@ -222,38 +319,159 @@ function setupEventListeners() {
 
     // Upload form
     const uploadForm = document.getElementById('uploadForm');
-    const fileUploadArea = document.getElementById('fileUploadArea');
-    const fileInput = document.getElementById('wallpaperImage');
+    if (uploadForm) {
+        // Elements
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('wallpaperImage');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const uploadMessage = document.getElementById('uploadMessage');
+        const uploadBtn = document.getElementById('uploadBtn');
 
-    // Drag and drop
-    fileUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.borderColor = 'white';
-        fileUploadArea.style.backgroundColor = 'rgba(255,255,255,0.2)';
-    });
+        // Live Preview Elements
+        const previewTitle = document.getElementById('livePreviewTitle');
+        const previewType = document.getElementById('livePreviewType');
+        const previewCategory = document.getElementById('livePreviewCategory');
+        const previewArtist = document.getElementById('livePreviewArtist');
+        const previewImage = document.getElementById('livePreviewImage');
 
-    fileUploadArea.addEventListener('dragleave', () => {
-        fileUploadArea.style.borderColor = 'rgba(255,255,255,0.5)';
-        fileUploadArea.style.backgroundColor = 'rgba(255,255,255,0.1)';
-    });
+        // Input Elements for Event Listeners
+        const titleInput = document.getElementById('wallpaperTitle');
+        const typeInput = document.getElementById('wallpaperType');
+        const categoryInput = document.getElementById('wallpaperCategory');
+        const artistInput = document.getElementById('artistName');
 
-    fileUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const files = e.dataTransfer.files;
-        fileInput.files = files;
-        previewImage(files[0]);
-    });
-
-    fileUploadArea.addEventListener('click', () => fileInput.click());
-
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            previewImage(e.target.files[0]);
+        // --- Live Preview Logic ---
+        if (titleInput && previewTitle) {
+            titleInput.addEventListener('input', (e) => {
+                previewTitle.textContent = e.target.value.trim() || 'Your Title Here';
+            });
         }
-    });
 
-    // Form submission
-    uploadForm.addEventListener('submit', handleUploadSubmit);
+        if (typeInput && previewType) {
+            typeInput.addEventListener('change', (e) => {
+                const map = { 'pc': 'PC', 'mobile': 'Mobile', 'both': 'PC & Mobile' };
+                previewType.textContent = map[e.target.value] || 'PC';
+            });
+        }
+
+        if (categoryInput && previewCategory) {
+            categoryInput.addEventListener('change', (e) => {
+                previewCategory.textContent = e.target.value || 'nature';
+            });
+        }
+
+        if (artistInput && previewArtist) {
+            artistInput.addEventListener('input', (e) => {
+                previewArtist.textContent = e.target.value.trim() || 'Anonymous';
+            });
+        }
+
+        const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+        const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+        // File validation helper
+        function validateFile(file) {
+            if (!file) return { valid: false, message: 'No file selected' };
+
+            if (!ALLOWED_TYPES.includes(file.type)) {
+                return { valid: false, message: 'Invalid file format. Please use JPG, PNG, or WebP' };
+            }
+
+            if (file.size > MAX_FILE_SIZE) {
+                return { valid: false, message: 'File size exceeds 10MB limit' };
+            }
+
+            return { valid: true };
+        }
+
+        // Show message helper
+        function showMessage(text, type = 'info') {
+            uploadMessage.textContent = '';
+            uploadMessage.className = `upload - message ${type} `;
+
+            let icon = '';
+            if (type === 'success') icon = '✓';
+            else if (type === 'error') icon = '✕';
+            else if (type === 'info') icon = 'ℹ';
+
+            uploadMessage.innerHTML = `< span > ${icon}</span > <span>${text}</span>`;
+            uploadMessage.style.display = 'flex';
+
+            if (type !== 'error') {
+                setTimeout(() => {
+                    uploadMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Display file info
+        function displayFileInfo(file) {
+            fileName.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            fileInfo.style.display = 'flex';
+        }
+
+        // Update Preview Image
+        function updatePreviewImage(file) {
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    if (previewImage) previewImage.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Drag and drop
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileUploadArea.classList.add('dragover');
+        });
+
+        fileUploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileUploadArea.classList.remove('dragover');
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileUploadArea.classList.remove('dragover');
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const validation = validateFile(files[0]);
+                if (validation.valid) {
+                    fileInput.files = files;
+                    displayFileInfo(files[0]);
+                    updatePreviewImage(files[0]);
+                } else {
+                    showMessage(validation.message, 'error');
+                }
+            }
+        });
+
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const validation = validateFile(e.target.files[0]);
+                if (validation.valid) {
+                    displayFileInfo(e.target.files[0]);
+                    updatePreviewImage(e.target.files[0]);
+                } else {
+                    showMessage(validation.message, 'error');
+                    fileInput.value = '';
+                    fileInfo.style.display = 'none';
+                }
+            }
+        });
+
+        // Form submission
+        uploadForm.addEventListener('submit', handleUploadSubmit);
+    }
 
     // Hamburger menu - Enhanced mobile navigation
     const hamburger = document.querySelector('.hamburger');
@@ -280,7 +498,7 @@ function setupEventListeners() {
         document.addEventListener('click', (e) => {
             const isClickInsideNav = navMenu.contains(e.target);
             const isClickOnHamburger = hamburger.contains(e.target);
-            
+
             if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
             }
@@ -299,7 +517,7 @@ function setupEventListeners() {
 function previewImage(file) {
     if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const preview = document.getElementById('uploadPreview');
             const img = document.getElementById('previewImage');
             img.src = e.target.result;
@@ -313,6 +531,13 @@ function previewImage(file) {
 function handleUploadSubmit(e) {
     e.preventDefault();
 
+    const uploadForm = document.getElementById('uploadForm');
+    const uploadProgress = document.getElementById('uploadProgress');
+    const progressFill = document.getElementById('progressFill');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadMessage = document.getElementById('uploadMessage');
+
     const title = document.getElementById('wallpaperTitle').value;
     const type = document.getElementById('wallpaperType').value;
     const category = document.getElementById('wallpaperCategory').value;
@@ -321,48 +546,90 @@ function handleUploadSubmit(e) {
     const imageInput = document.getElementById('wallpaperImage');
 
     if (imageInput.files.length === 0) {
-        alert('Please select an image');
+        uploadMessage.innerHTML = '<span>✕</span><span>Please select an image</span>';
+        uploadMessage.className = 'upload-message error';
+        uploadMessage.style.display = 'flex';
         return;
     }
 
     const file = imageInput.files[0];
 
-    // Check file size (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-        alert('File size must be less than 10MB');
+    // Validate file
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+        uploadMessage.innerHTML = '<span>✕</span><span>Invalid file format. Please use JPG, PNG, or WebP</span>';
+        uploadMessage.className = 'upload-message error';
+        uploadMessage.style.display = 'flex';
         return;
     }
 
+    if (file.size > MAX_FILE_SIZE) {
+        uploadMessage.innerHTML = '<span>✕</span><span>File size exceeds 10MB limit</span>';
+        uploadMessage.className = 'upload-message error';
+        uploadMessage.style.display = 'flex';
+        return;
+    }
+
+    // Show progress
+    uploadProgress.style.display = 'block';
+    uploadBtn.disabled = true;
+    progressFill.style.width = '0%';
+
+    // Simulate upload progress
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += Math.random() * 30;
+        if (progress > 90) progress = 90;
+        progressFill.style.width = progress + '%';
+    }, 200);
+
     // Read image as data URL and create wallpaper object
     const reader = new FileReader();
-    reader.onload = function(e) {
-        const newWallpaper = {
-            id: Date.now(),
-            title: title,
-            category: category,
-            type: type === 'both' ? 'both' : type,
-            description: description,
-            artist: artist,
-            image: e.target.result
-        };
+    reader.onload = function (e) {
+        clearInterval(progressInterval);
+        progressFill.style.width = '100%';
+        uploadStatus.textContent = 'Processing...';
 
-        // Add to wallpaper data
-        if (type === 'pc' || type === 'both') {
-            wallpaperData.pc.unshift(newWallpaper);
-        }
-        if (type === 'mobile' || type === 'both') {
-            wallpaperData.mobile.unshift(newWallpaper);
-        }
+        setTimeout(() => {
+            const newWallpaper = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                type: type === 'both' ? 'both' : type,
+                description: description,
+                artist: artist,
+                image: e.target.result
+            };
 
-        // Show success message
-        showSuccessMessage('Wallpaper uploaded successfully!');
+            // Add to wallpaper data
+            if (type === 'pc' || type === 'both') {
+                wallpaperData.pc.unshift(newWallpaper);
+            }
+            if (type === 'mobile' || type === 'both') {
+                wallpaperData.mobile.unshift(newWallpaper);
+            }
 
-        // Reset form
-        document.getElementById('uploadForm').reset();
-        document.getElementById('uploadPreview').style.display = 'none';
+            // Save to localStorage
+            saveWallpapers();
 
-        // Reload wallpapers
-        loadWallpapers();
+            // Hide progress
+            uploadProgress.style.display = 'none';
+            uploadBtn.disabled = false;
+
+            // Show success message
+            uploadMessage.innerHTML = '<span>✓</span><span>Wallpaper uploaded successfully! Thank you for sharing.</span>';
+            uploadMessage.className = 'upload-message success';
+            uploadMessage.style.display = 'flex';
+
+            // Reset form
+            uploadForm.reset();
+            document.getElementById('uploadPreview').style.display = 'none';
+            document.getElementById('fileInfo').style.display = 'none';
+
+            // Reload wallpapers
+        }, 800);
     };
     reader.readAsDataURL(file);
 }
@@ -371,17 +638,17 @@ function showSuccessMessage(message) {
     const notification = document.createElement('div');
     notification.textContent = message;
     notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #00b894;
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-    `;
+position: fixed;
+top: 20px;
+right: 20px;
+background: #00b894;
+color: white;
+padding: 1rem 2rem;
+border - radius: 8px;
+box - shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+z - index: 10000;
+animation: slideIn 0.3s ease;
+`;
 
     document.body.appendChild(notification);
 
@@ -403,7 +670,7 @@ function openWallpaperModal(wallpaperId) {
     document.getElementById('modalImage').src = wallpaper.image;
     document.getElementById('modalTitle').textContent = wallpaper.title;
     document.getElementById('modalDescription').textContent = wallpaper.description || 'No description available';
-    document.getElementById('modalArtist').textContent = `By ${wallpaper.artist}`;
+    document.getElementById('modalArtist').textContent = `By ${wallpaper.artist} `;
 
     // Download button
     document.getElementById('downloadBtn').onclick = () => downloadWallpaper(wallpaper);
@@ -412,7 +679,7 @@ function openWallpaperModal(wallpaperId) {
     const favoriteBtn = document.getElementById('favoriteBtn');
     const favorites = getFavorites();
     const isFavorite = favorites.some(fav => fav.id === wallpaper.id);
-    
+
     if (isFavorite) {
         favoriteBtn.classList.add('active');
         favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Remove from Favorites';
@@ -447,24 +714,27 @@ function closeModal() {
 }
 
 // ==================== DOWNLOAD ====================
-function downloadWallpaper(wallpaper) {
-    const link = document.createElement('a');
-    link.href = wallpaper.image;
-    link.download = `${wallpaper.title.replace(/\s+/g, '_')}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    showSuccessMessage('Download started!');
+// ==================== DOWNLOAD ====================
+async function downloadWallpaper(wallpaper) {
+    showSuccessMessage('Preparing download...');
+
+    // Use DriveService to download to hide location
+    const success = await DriveService.downloadFile(wallpaper);
+
+    if (success) {
+        showSuccessMessage('Download started!');
+    } else {
+        showErrorMessage('Download failed. Opening directly...');
+    }
 }
 
 // ==================== SCROLL UTILITIES ====================
 function setupScrollListener() {
     const scrollBtn = document.getElementById('scrollToTopBtn');
     let scrollTimeout;
-    
+
     // Debounce scroll events for better performance
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             if (window.pageYOffset > 300) {
@@ -512,7 +782,7 @@ function toggleFavorite(wallpaper) {
 
     localStorage.setItem('wallpaperFavorites', JSON.stringify(favorites));
     loadFavorites();
-    
+
     // Update favorite button
     const favoriteBtn = document.getElementById('favoriteBtn');
     if (index > -1) {
@@ -545,27 +815,27 @@ function loadFavorites() {
 // ==================== ANIMATIONS ====================
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes slideIn {
+@keyframes slideIn {
         from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        transform: translateX(400px);
+        opacity: 0;
     }
+        to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 
-    @keyframes slideOut {
+@keyframes slideOut {
         from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
+        transform: translateX(0);
+        opacity: 1;
     }
+        to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
 `;
 document.head.appendChild(style);
 
@@ -596,13 +866,13 @@ function openAdminPanel() {
         showErrorMessage('Please login first');
         return;
     }
-    
+
     loadAdminPanel();
     const modal = document.getElementById('adminPanelModal');
     modal.classList.add('show');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const adminLoginForm = document.getElementById('adminLoginForm');
     if (adminLoginForm) {
         adminLoginForm.addEventListener('submit', handleAdminLogin);
@@ -610,7 +880,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const adminLoginModal = document.getElementById('adminLoginModal');
     if (adminLoginModal) {
-        adminLoginModal.addEventListener('click', function(e) {
+        adminLoginModal.addEventListener('click', function (e) {
             if (e.target === this) {
                 closeAdminLogin();
             }
@@ -619,7 +889,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const adminPanelModal = document.getElementById('adminPanelModal');
     if (adminPanelModal) {
-        adminPanelModal.addEventListener('click', function(e) {
+        adminPanelModal.addEventListener('click', function (e) {
             if (e.target === this) {
                 closeAdminPanel();
             }
@@ -649,7 +919,7 @@ function handleAdminLogin(e) {
         adminLoggedIn = true;
         statusMsg.style.color = '#00b894';
         statusMsg.textContent = '✓ Login successful! Redirecting to admin panel...';
-        
+
         setTimeout(() => {
             closeAdminLogin();
             openAdminPanel();
@@ -700,21 +970,21 @@ function loadAdminPanel() {
         const item = document.createElement('div');
         item.className = 'admin-wallpaper-item';
         item.innerHTML = `
-            <div class="admin-item-info">
+    < div class="admin-item-info" >
                 <h4>${wallpaper.title}</h4>
                 <p><i class="fas fa-tag"></i> ${wallpaper.category}</p>
                 <p><i class="fas fa-${wallpaper.type === 'pc' ? 'desktop' : 'mobile-alt'}"></i> ${wallpaper.type.toUpperCase()}</p>
                 <p><i class="fas fa-user"></i> ${wallpaper.artist}</p>
-            </div>
-            <div class="admin-item-actions">
-                <button class="btn btn-warning btn-small" onclick="openWallpaperEditForm(${wallpaper.id})">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-danger btn-small" onclick="confirmDeleteWallpaper(${wallpaper.id})">
-                    <i class="fas fa-trash"></i> Delete
-                </button>
-            </div>
-        `;
+            </div >
+    <div class="admin-item-actions">
+        <button class="btn btn-warning btn-small" onclick="openWallpaperEditForm(${wallpaper.id})">
+            <i class="fas fa-edit"></i> Edit
+        </button>
+        <button class="btn btn-danger btn-small" onclick="confirmDeleteWallpaper(${wallpaper.id})">
+            <i class="fas fa-trash"></i> Delete
+        </button>
+    </div>
+`;
         adminList.appendChild(item);
     });
 }
@@ -725,23 +995,22 @@ function deleteWallpaper(wallpaperId) {
         return;
     }
 
-    if (confirm('Are you sure you want to delete this wallpaper?')) {
-        // Remove from PC wallpapers
-        const pcIndex = wallpaperData.pc.findIndex(w => w.id === wallpaperId);
-        if (pcIndex > -1) {
-            wallpaperData.pc.splice(pcIndex, 1);
-        }
-
-        // Remove from Mobile wallpapers
-        const mobileIndex = wallpaperData.mobile.findIndex(w => w.id === wallpaperId);
-        if (mobileIndex > -1) {
-            wallpaperData.mobile.splice(mobileIndex, 1);
-        }
-
-        closeModal();
-        loadWallpapers();
-        showSuccessMessage('Wallpaper deleted successfully');
+    // Remove from PC wallpapers
+    const pcIndex = wallpaperData.pc.findIndex(w => w.id === wallpaperId);
+    if (pcIndex > -1) {
+        wallpaperData.pc.splice(pcIndex, 1);
     }
+
+    // Remove from Mobile wallpapers
+    const mobileIndex = wallpaperData.mobile.findIndex(w => w.id === wallpaperId);
+    if (mobileIndex > -1) {
+        wallpaperData.mobile.splice(mobileIndex, 1);
+    }
+
+    closeModal();
+    loadWallpapers();
+    loadAdminPanel();
+    showSuccessMessage('Wallpaper deleted successfully');
 }
 
 function confirmDeleteWallpaper(wallpaperId) {
@@ -752,7 +1021,6 @@ function confirmDeleteWallpaper(wallpaperId) {
 
     if (confirm('Are you sure you want to delete this wallpaper?')) {
         deleteWallpaper(wallpaperId);
-        loadAdminPanel();
     }
 }
 
@@ -810,17 +1078,17 @@ function showErrorMessage(message) {
     const notification = document.createElement('div');
     notification.textContent = message;
     notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #e74c3c;
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-    `;
+position: fixed;
+top: 20px;
+right: 20px;
+background: #e74c3c;
+color: white;
+padding: 1rem 2rem;
+border - radius: 8px;
+box - shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+z - index: 10000;
+animation: slideIn 0.3s ease;
+`;
 
     document.body.appendChild(notification);
 
@@ -828,4 +1096,71 @@ function showErrorMessage(message) {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 3000);
+}
+// ==================== HERO ANIMATION ====================
+function initHeroAnimation() {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resize() {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+        createParticles();
+    }
+
+    function createParticles() {
+        particles = [];
+        const count = Math.floor(width * height / 15000);
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1,
+                alpha: Math.random() * 0.5 + 0.1
+            });
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+
+        particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const p2 = particles[j];
+                const dx = p.x - p2.x;
+                const dy = p.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - dist / 100)})`;
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+        });
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
 }

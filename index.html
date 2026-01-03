@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +9,24 @@
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <div class="logo-icon-wrapper">
-                    <i class="fas fa-image"></i>
-                </div>
-                <span class="logo-text">WallHub</span>
+                <img src="images/mg-logo.png" alt="MG Logo" class="mg-logo-img">
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#pc-wallpapers" class="nav-link">PC Wallpapers</a></li>
                 <li><a href="#mobile-wallpapers" class="nav-link">Mobile Wallpapers</a></li>
-                <li><a href="#upload" class="nav-link">Upload</a></li>
+                <li><a href="upload.html" class="nav-link">Upload</a></li>
                 <li><a href="#favorites" class="nav-link"><i class="fas fa-heart"></i> Favorites</a></li>
-                <li><button class="nav-link theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
-                <li><button class="nav-link admin-btn" onclick="openAdminLogin()"><i class="fas fa-shield-alt"></i> Admin</button></li>
+                <li><button class="nav-link theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark mode"><i
+                            class="fas fa-moon"></i></button></li>
+                <li><button class="nav-link admin-btn" onclick="openAdminLogin()"><i class="fas fa-shield-alt"></i>
+                        Admin</button></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -39,17 +40,17 @@
     <section class="branding-section">
         <div class="brand-logo-container">
             <div class="brand-logo">
-                <div class="logo-circle">
-                    <i class="fas fa-image"></i>
+                <div class="logo-circle-large">
+                    <img src="images/mg-logo.png" alt="MG Logo" class="mg-logo-img-large">
                 </div>
-                <h1 class="brand-name">WallHub</h1>
-                <p class="brand-tagline">Premium Wallpaper Collection</p>
+                <p class="brand-tagline">Premium Media Gallery</p>
             </div>
         </div>
     </section>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <canvas id="heroCanvas"></canvas>
         <div class="hero-content">
             <h1 class="hero-title">Discover Beautiful Wallpapers</h1>
             <p class="hero-subtitle">Curated collection of stunning wallpapers for all your devices</p>
@@ -57,7 +58,7 @@
                 <a href="#pc-wallpapers" class="btn btn-primary btn-large">
                     <i class="fas fa-images"></i> Explore Wallpapers
                 </a>
-                <a href="#upload" class="btn btn-secondary btn-large">
+                <a href="upload.html" class="btn btn-secondary btn-large">
                     <i class="fas fa-cloud-upload-alt"></i> Share Your Art
                 </a>
             </div>
@@ -91,118 +92,83 @@
 
     <!-- PC Wallpapers Section -->
     <section class="wallpaper-section" id="pc-wallpapers">
-        <div class="section-header">
-            <h2><i class="fas fa-desktop"></i> PC Wallpapers</h2>
-            <p>High-quality wallpapers for your desktop (1920x1080 and above)</p>
-        </div>
+        <div class="section-container">
+            <div class="section-header">
+                <h2><i class="fas fa-desktop"></i> PC Wallpapers</h2>
+                <p>High-quality wallpapers for your desktop (1920x1080 and above)</p>
+            </div>
 
-        <!-- Category Filter -->
-        <div class="category-filter">
-            <button class="category-btn active" data-category="all" data-type="pc">All</button>
-            <button class="category-btn" data-category="nature" data-type="pc">Nature</button>
-            <button class="category-btn" data-category="abstract" data-type="pc">Abstract</button>
-            <button class="category-btn" data-category="technology" data-type="pc">Technology</button>
-            <button class="category-btn" data-category="art" data-type="pc">Art</button>
-            <button class="category-btn" data-category="minimalist" data-type="pc">Minimalist</button>
-        </div>
+            <!-- Category Filter -->
+            <div class="category-filter-wrapper">
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all" data-type="pc">
+                        <i class="fas fa-th"></i> All
+                    </button>
+                    <button class="category-btn" data-category="nature" data-type="pc">
+                        <i class="fas fa-leaf"></i> Nature
+                    </button>
+                    <button class="category-btn" data-category="abstract" data-type="pc">
+                        <i class="fas fa-palette"></i> Abstract
+                    </button>
+                    <button class="category-btn" data-category="technology" data-type="pc">
+                        <i class="fas fa-microchip"></i> Technology
+                    </button>
+                    <button class="category-btn" data-category="art" data-type="pc">
+                        <i class="fas fa-image"></i> Art
+                    </button>
+                    <button class="category-btn" data-category="minimalist" data-type="pc">
+                        <i class="fas fa-square"></i> Minimalist
+                    </button>
+                </div>
+            </div>
 
-        <!-- Wallpaper Grid -->
-        <div class="wallpaper-grid" id="pc-grid">
-            <!-- Wallpapers will be loaded here dynamically -->
+            <!-- Wallpaper Grid -->
+            <div class="wallpaper-grid" id="pc-grid">
+                <!-- Wallpapers will be loaded here dynamically -->
+            </div>
         </div>
     </section>
 
     <!-- Mobile Wallpapers Section -->
     <section class="wallpaper-section" id="mobile-wallpapers">
-        <div class="section-header">
-            <h2><i class="fas fa-mobile-alt"></i> Mobile Wallpapers</h2>
-            <p>Perfect wallpapers for your smartphone (1080x1920 and above)</p>
-        </div>
-
-        <!-- Category Filter -->
-        <div class="category-filter">
-            <button class="category-btn active" data-category="all" data-type="mobile">All</button>
-            <button class="category-btn" data-category="nature" data-type="mobile">Nature</button>
-            <button class="category-btn" data-category="abstract" data-type="mobile">Abstract</button>
-            <button class="category-btn" data-category="technology" data-type="mobile">Technology</button>
-            <button class="category-btn" data-category="art" data-type="mobile">Art</button>
-            <button class="category-btn" data-category="minimalist" data-type="mobile">Minimalist</button>
-        </div>
-
-        <!-- Wallpaper Grid -->
-        <div class="wallpaper-grid" id="mobile-grid">
-            <!-- Wallpapers will be loaded here dynamically -->
-        </div>
-    </section>
-
-    <!-- Upload Section -->
-    <section class="upload-section" id="upload">
-        <div class="upload-container">
+        <div class="section-container">
             <div class="section-header">
-                <h2><i class="fas fa-cloud-upload-alt"></i> Share Your Wallpaper</h2>
-                <p>Upload your beautiful wallpapers and share them with our community</p>
+                <h2><i class="fas fa-mobile-alt"></i> Mobile Wallpapers</h2>
+                <p>Perfect wallpapers for your smartphone (1080x1920 and above)</p>
             </div>
 
-            <div class="upload-form-wrapper">
-                <form id="uploadForm" class="upload-form">
-                    <div class="form-group">
-                        <label for="wallpaperTitle">Wallpaper Title *</label>
-                        <input type="text" id="wallpaperTitle" name="title" placeholder="Enter wallpaper title" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="wallpaperType">Wallpaper Type *</label>
-                        <select id="wallpaperType" name="type" required>
-                            <option value="">Select type</option>
-                            <option value="pc">PC Wallpaper (1920x1080+)</option>
-                            <option value="mobile">Mobile Wallpaper (1080x1920+)</option>
-                            <option value="both">Both PC & Mobile</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="wallpaperCategory">Category *</label>
-                        <select id="wallpaperCategory" name="category" required>
-                            <option value="">Select category</option>
-                            <option value="nature">Nature</option>
-                            <option value="abstract">Abstract</option>
-                            <option value="technology">Technology</option>
-                            <option value="art">Art</option>
-                            <option value="minimalist">Minimalist</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="wallpaperDescription">Description</label>
-                        <textarea id="wallpaperDescription" name="description" placeholder="Add a brief description..." rows="4"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="wallpaperImage">Upload Image *</label>
-                        <div class="file-upload-area" id="fileUploadArea">
-                            <i class="fas fa-image"></i>
-                            <p>Drag and drop your image here or click to browse</p>
-                            <input type="file" id="wallpaperImage" name="image" accept="image/*" required>
-                        </div>
-                        <small>Supported formats: JPG, PNG, WebP (Max 10MB)</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="artistName">Your Name (Optional)</label>
-                        <input type="text" id="artistName" name="artist" placeholder="Your name or artist name">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-large">
-                        <i class="fas fa-upload"></i> Upload Wallpaper
+            <!-- Category Filter -->
+            <div class="category-filter-wrapper">
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all" data-type="mobile">
+                        <i class="fas fa-th"></i> All
                     </button>
-                </form>
-
-                <div id="uploadPreview" class="upload-preview" style="display: none;">
-                    <img id="previewImage" src="" alt="Preview">
+                    <button class="category-btn" data-category="nature" data-type="mobile">
+                        <i class="fas fa-leaf"></i> Nature
+                    </button>
+                    <button class="category-btn" data-category="abstract" data-type="mobile">
+                        <i class="fas fa-palette"></i> Abstract
+                    </button>
+                    <button class="category-btn" data-category="technology" data-type="mobile">
+                        <i class="fas fa-microchip"></i> Technology
+                    </button>
+                    <button class="category-btn" data-category="art" data-type="mobile">
+                        <i class="fas fa-image"></i> Art
+                    </button>
+                    <button class="category-btn" data-category="minimalist" data-type="mobile">
+                        <i class="fas fa-square"></i> Minimalist
+                    </button>
                 </div>
             </div>
+
+            <!-- Wallpaper Grid -->
+            <div class="wallpaper-grid" id="mobile-grid">
+                <!-- Wallpapers will be loaded here dynamically -->
+            </div>
         </div>
     </section>
+
+    <!-- Upload Section Moved to upload.html -->
 
     <!-- Wallpaper Modal -->
     <div class="modal" id="wallpaperModal">
@@ -257,7 +223,8 @@
                     </div>
                     <div class="form-group">
                         <label for="adminPassword">Password</label>
-                        <input type="password" id="adminPassword" name="password" placeholder="Enter your password" required>
+                        <input type="password" id="adminPassword" name="password" placeholder="Enter your password"
+                            required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-large">Login</button>
                 </form>
@@ -276,7 +243,8 @@
                         <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
                         <p class="admin-subtitle">Manage your wallpaper collection</p>
                     </div>
-                    <button class="btn btn-small btn-danger" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    <button class="btn btn-small btn-danger" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i>
+                        Logout</button>
                 </div>
 
                 <div class="admin-stats">
@@ -310,7 +278,8 @@
                 </div>
 
                 <div class="admin-toolbar">
-                    <input type="text" id="adminSearchInput" class="admin-search" placeholder="Search wallpapers by title...">
+                    <input type="text" id="adminSearchInput" class="admin-search"
+                        placeholder="Search wallpapers by title...">
                     <select id="adminFilterSelect" class="admin-filter">
                         <option value="all">All Types</option>
                         <option value="pc">PC Only</option>
@@ -340,7 +309,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#pc-wallpapers">PC Wallpapers</a></li>
                     <li><a href="#mobile-wallpapers">Mobile Wallpapers</a></li>
-                    <li><a href="#upload">Upload</a></li>
+                    <li><a href="upload.html">Upload</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -354,12 +323,13 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 WallHub. All rights reserved. Made with <i class="fas fa-heart"></i> for wallpaper lovers.</p>
+            <p>&copy; 2026 WallHub. All rights reserved. Made with <i class="fas fa-heart"></i> for wallpaper lovers.
+            </p>
         </div>
     </footer>
 
     <!-- Floating Action Button -->
-    <div class="floating-action-button" onclick="document.getElementById('upload').scrollIntoView({behavior: 'smooth'}); openUploadTab();" title="Upload Wallpaper">
+    <div class="floating-action-button" onclick="window.location.href='upload.html'" title="Upload Wallpaper">
         <i class="fas fa-plus"></i>
     </div>
 
@@ -368,6 +338,16 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- Loading Overlay -->
+    <div id="appLoader" class="loader-overlay" style="display: flex;">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <h3>Connecting to Drive...</h3>
+        </div>
+    </div>
+
+    <script src="js/drive.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

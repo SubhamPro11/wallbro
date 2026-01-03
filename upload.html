@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Wallpaper - WallHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="images/mg-logo.png" alt="MG Logo" class="mg-logo-img">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#pc-wallpapers" class="nav-link">PC Wallpapers</a></li>
+                <li><a href="index.html#mobile-wallpapers" class="nav-link">Mobile Wallpapers</a></li>
+                <li><a href="upload.html" class="nav-link active">Upload</a></li>
+                <li><button class="nav-link theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark mode"><i
+                            class="fas fa-moon"></i></button></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Branding Section (Smaller for subpage) -->
+    <section class="branding-section" style="padding: 2rem 0; min-height: auto;">
+        <div class="brand-logo-container">
+            <div class="brand-logo">
+                <p class="brand-tagline">Share Your Creativity</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload-section" id="upload" style="padding-top: 2rem;">
+        <div class="upload-container">
+            <div class="section-header">
+                <h2><i class="fas fa-cloud-upload-alt"></i> Share Your Wallpaper</h2>
+                <p>Upload your beautiful wallpapers and share them with the world</p>
+            </div>
+
+            <div class="upload-layout">
+                <!-- Left Column: Form -->
+                <div class="upload-form-wrapper glass-panel">
+                    <form id="uploadForm" class="upload-form">
+                        <!-- Form Status Messages -->
+                        <div id="uploadMessage" class="upload-message" style="display: none;"></div>
+
+                        <div class="form-group">
+                            <label for="wallpaperTitle">
+                                <i class="fas fa-heading"></i> Wallpaper Title <span class="required">*</span>
+                            </label>
+                            <input type="text" id="wallpaperTitle" name="title" placeholder="Enter an engaging title"
+                                required autocomplete="off">
+                            <small class="form-hint">Make it descriptive and catchy</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="wallpaperType">
+                                    <i class="fas fa-mobile-alt"></i> Device Type <span class="required">*</span>
+                                </label>
+                                <select id="wallpaperType" name="type" required>
+                                    <option value="pc">PC Wallpaper</option>
+                                    <option value="mobile">Mobile Wallpaper</option>
+                                    <option value="both">Both PC & Mobile</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="wallpaperCategory">
+                                    <i class="fas fa-folder"></i> Category <span class="required">*</span>
+                                </label>
+                                <select id="wallpaperCategory" name="category" required>
+                                    <option value="nature">🍃 Nature</option>
+                                    <option value="abstract">🎨 Abstract</option>
+                                    <option value="technology">💻 Technology</option>
+                                    <option value="art">🖼️ Art</option>
+                                    <option value="minimalist">⬜ Minimalist</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="wallpaperDescription">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea id="wallpaperDescription" name="description"
+                                placeholder="Add a brief description..." rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-image"></i> Upload Image <span class="required">*</span>
+                            </label>
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <p class="upload-text">Drag & Drop or Click to Upload</p>
+                                <input type="file" id="wallpaperImage" name="image" accept="image/*" required>
+                            </div>
+                            <div class="upload-info">
+                                <div id="fileInfo" class="file-info" style="display: none;">
+                                    <i class="fas fa-check-circle"></i> <span id="fileName"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="artistName">
+                                <i class="fas fa-user"></i> Your Name
+                            </label>
+                            <input type="text" id="artistName" name="artist" placeholder="Your name (optional)"
+                                autocomplete="off">
+                        </div>
+
+                        <!-- Upload Progress -->
+                        <div id="uploadProgress" class="upload-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <p id="uploadStatus">Uploading...</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large upload-btn" id="uploadBtn">
+                            <i class="fas fa-upload"></i> Share Wallpaper
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column: Live Preview -->
+                <div class="preview-column">
+                    <div class="preview-header">
+                        <h3><i class="fas fa-eye"></i> Live Preview</h3>
+                        <p>This is how your wallpaper will look</p>
+                    </div>
+
+                    <div class="live-preview-container">
+                        <!-- Preview Card -->
+                        <div class="wallpaper-card live-preview-card" id="livePreviewCard">
+                            <div class="card-image-wrapper">
+                                <img src="images/placeholder.svg" alt="Preview" id="livePreviewImage">
+                                <div class="card-overlay">
+                                    <div class="card-actions">
+                                        <button class="action-btn" title="Download"><i
+                                                class="fas fa-download"></i></button>
+                                        <button class="action-btn" title="Add to Favorites"><i
+                                                class="far fa-heart"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-category" id="livePreviewCategory">nature</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="wallpaper-title" id="livePreviewTitle">Your Title Here</h3>
+                                <div class="wallpaper-meta">
+                                    <span class="wallpaper-author"><i class="fas fa-user"></i> <span
+                                            id="livePreviewArtist">Anonymous</span></span>
+                                    <span class="wallpaper-type"><i class="fas fa-desktop"></i> <span
+                                            id="livePreviewType">PC</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preview-tips">
+                        <h4><i class="fas fa-lightbulb"></i> Pro Tips</h4>
+                        <ul>
+                            <li>Use high-resolution images (1920x1080+)</li>
+                            <li>Keep titles short and descriptive</li>
+                            <li>Select the most accurate category</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>WallHub</h3>
+                <p>Your destination for beautiful wallpapers</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pc-wallpapers">PC Wallpapers</a></li>
+                    <li><a href="index.html#mobile-wallpapers">Mobile Wallpapers</a></li>
+                    <li><a href="upload.html">Upload</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WallHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
